@@ -23,7 +23,7 @@ public  class ScoreField extends JPanel {
         int[] m = new int[4];
 
         int i;
-        for (i = 0; i < 0; ++i) {
+        for ( i = 0; i < m.length; ++i) {
             m[i] = 0;
         }
 

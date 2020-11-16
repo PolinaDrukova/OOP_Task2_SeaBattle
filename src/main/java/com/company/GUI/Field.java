@@ -31,8 +31,8 @@ public class Field extends PanelField {
 
 
     @Override
-    protected void paintElement(Graphics g, int i, int j) {
-        com.company.objects.Point point = new Point(i, j);
+    public void paintElement(Graphics g, int i, int j) {
+        Point point = new Point(i, j);
         CellState state = game.getPlayers(player).getBattleField().getCell(point).getState();
         g.setColor(getColorByStateElement(state));
         if (state == CellState.missed) {

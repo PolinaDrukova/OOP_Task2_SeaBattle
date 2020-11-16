@@ -142,8 +142,6 @@ public class Service_BusinessLogic {
         while (isAlivePlayer(game, 0) && isAlivePlayer(game, 1)) {
             if (!shot(game.getPlayers(game.getCurrentIndex()))) {
                 game.step();
-//                Service_Console.draw(game);
-
             }
         }
         if (whoWin(game) == -1) {
@@ -152,6 +150,25 @@ public class Service_BusinessLogic {
         } else {
             System.out.println("Выйграл : " + whoWin(game));
         }
+    }
+
+
+    public void gameStep(Game game) {
+        if (isAlivePlayer(game, 0) && isAlivePlayer(game, 1)) {
+            if (!shot(game.getPlayers(game.getCurrentIndex()))) {
+                game.step();
+            }
+        }
+        if (!(isAlivePlayer(game, 0)) || !(isAlivePlayer(game, 1))) {
+            if (whoWin(game) == -1) {
+                System.out.println("Ничья");
+
+            } else {
+                System.out.println("Выйграл : " + whoWin(game));
+            }
+        }
+
+
     }
 
     public Integer whoWin(Game game) {
@@ -185,7 +202,7 @@ public class Service_BusinessLogic {
             for (Ship ship : player.getShips()) {
                 if (ship.getDecks().contains(cell)) {
                     if (!ship.isAliveShip()) {
-                        boards(player, ship);
+                        boards(player.getBattleField(), ship);
                     }
                 }
 
@@ -198,25 +215,25 @@ public class Service_BusinessLogic {
     }
 
 
-    private void boards(BasePlayer player, Ship ship) {
+    private void boards(BattleField field, Ship ship) {
         for (Cell c : ship.getDecks()) {
             int x = c.getPosition().getX();
             int y = c.getPosition().getY();
+
             for (int i = -1; i < 2; i++) {
                 for (int j = -1; j < 2; j++) {
-                    Point point = new Point(x + i, y + j);
-                    if (player.getBattleField().isValidCoord(point)) {
-                        Cell cell = player.getBattleField().getCell(point);
-                        if (player.getBattleField().getShotPoints().contains(cell)) {
-                            player.getBattleField().getShotPoints().remove(c);
-                            if (cell.getState() == CellState.empty) {
-                                cell.setState(CellState.missed);
-                            }
+                    Point point = new Point( y + j, x + i);
+                    if (field.isValidCoord(point)) {
+                        Cell cell = field.getCell(point);
+                        field.getShotPoints().remove(cell);
+                        if (cell.getState() == CellState.empty) {
+                            cell.setState(CellState.missed);
                         }
                     }
                 }
             }
         }
+
     }
 
     private int random(int x, int y) {

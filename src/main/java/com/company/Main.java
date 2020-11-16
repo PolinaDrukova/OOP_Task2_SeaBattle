@@ -1,6 +1,6 @@
 package com.company;
 
-import com.company.GUI.GameView;
+import com.company.GUI.MainFrame;
 import com.company.GameMap.Game;
 import com.company.Logic.Service_BusinessLogic;
 
@@ -10,7 +10,6 @@ public class Main {
     public static void main(String[] args) {
         Game game = new Game();
         Service_BusinessLogic logic = new Service_BusinessLogic();
-        logic.newGame(game);
 
         try {
             UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsClassicLookAndFeel");
@@ -19,17 +18,19 @@ public class Main {
             var3.printStackTrace();
         }
 
-        GameView view = new GameView(game);
+        MainFrame view = new MainFrame(game);
 
         view.setVisible(true);
 
-        if (logic.whoWin(game) == -1) {
-            String message = " Ничья ";
-            JOptionPane.showMessageDialog(null, message);
-        } else {
-            String message = " Выйграл " + logic.whoWin(game) + " игрок";
-            JOptionPane.showMessageDialog(null, message);
-        }
 
+        if (!(logic.isAlivePlayer(game, 0)) || !(logic.isAlivePlayer(game, 0))) {
+            if (logic.whoWin(game) == -1) {
+                String message = " Ничья ";
+                JOptionPane.showMessageDialog(null, message);
+            } else {
+                String message = " Выйграл " + logic.whoWin(game) + " игрок";
+                JOptionPane.showMessageDialog(null, message);
+            }
+        }
     }
 }
