@@ -13,6 +13,13 @@ import com.company.objects.Ship;
 import java.util.*;
 
 public class Service_BusinessLogic {
+
+    private int currentIndex = 0;
+    private int n = 2;
+    private BasePlayer[] players = new BasePlayer[n];
+    public int width = 10;
+    public int height = 10;
+
     public void fill(BattleField field, List<Ship> ships) {
         Random rand = new Random();
         Map<DeckCount, Integer> shipCounter = shipCounter();
@@ -76,7 +83,7 @@ public class Service_BusinessLogic {
             for (int j = -1; j < 2; j++) {
                 if (!(i == 0 && j == 0)) {
                     Point point = new Point(position.getX() + i, position.getY() + j);
-                    if (field.isValidCoord(point) && field.getCell(point).getState() == CellState.alive) {
+                    if (isValidCoord(point) && field.getCell(point).getState() == CellState.alive) {
                         if (!(point.getX() == lastPosition.getX() && point.getY() == lastPosition.getY())) {
                             return false;
                         }
@@ -93,7 +100,7 @@ public class Service_BusinessLogic {
         Point position = new Point(startCoord.getX(), startCoord.getY());
         Point lastPosition = new Point(-1, -1);
         for (int i = 0; i < dc.getValue(); i++) {
-            isPosiblePlace = field.isValidCoord(position) &&
+            isPosiblePlace = isValidCoord(position) &&
                     noNeighbours(position, lastPosition, field);
 
             if (!isPosiblePlace) {
@@ -122,7 +129,7 @@ public class Service_BusinessLogic {
         Point position = new Point(startCoord.getX(), startCoord.getY());
         Point lastPosition = new Point(-1, -1);
         for (int i = 0; i < deckCount.getValue(); i++) {
-            isPosiblePlace = map.isValidCoord(position) && noNeighbours(position, lastPosition, map);
+            isPosiblePlace = isValidCoord(position) && noNeighbours(position, lastPosition, map);
             if (!isPosiblePlace) {
                 break;
             }
@@ -138,10 +145,25 @@ public class Service_BusinessLogic {
         return null;
     }
 
+    public boolean isValidCoord(Point point) {
+        return point.getX() >= 0 && point.getX() < width && point.getY() >= 0 && point.getY() < height;
+    }
+
+    public void step() {
+        currentIndex++;
+        if (currentIndex >= players.length) {
+            currentIndex = 0;
+        }
+    }
+
+    public int getCurrentIndex() {
+        return currentIndex;
+    }
+
     public void newGame(Game game) {
         while (isAlivePlayer(game, 0) && isAlivePlayer(game, 1)) {
-            if (!shot(game.getPlayers(game.getCurrentIndex()))) {
-                game.step();
+            if (!shot(game.getPlayers(getCurrentIndex()))) {
+                step();
             }
         }
         if (whoWin(game) == -1) {
@@ -155,8 +177,8 @@ public class Service_BusinessLogic {
 
     public void gameStep(Game game) {
         if (isAlivePlayer(game, 0) && isAlivePlayer(game, 1)) {
-            if (!shot(game.getPlayers(game.getCurrentIndex()))) {
-                game.step();
+            if (!shot(game.getPlayers(getCurrentIndex()))) {
+                step();
             }
         }
         if (!(isAlivePlayer(game, 0)) || !(isAlivePlayer(game, 1))) {
@@ -222,8 +244,8 @@ public class Service_BusinessLogic {
 
             for (int i = -1; i < 2; i++) {
                 for (int j = -1; j < 2; j++) {
-                    Point point = new Point( y + j, x + i);
-                    if (field.isValidCoord(point)) {
+                    Point point = new Point(y + j, x + i);
+                    if (isValidCoord(point)) {
                         Cell cell = field.getCell(point);
                         field.getShotPoints().remove(cell);
                         if (cell.getState() == CellState.empty) {

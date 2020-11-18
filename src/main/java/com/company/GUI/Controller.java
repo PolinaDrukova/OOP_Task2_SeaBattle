@@ -21,19 +21,8 @@ public class Controller implements ActionListener {
         String cmd = e.getActionCommand();
         if (cmd.equals("Новая игра")) {
             Game game1 = new Game();
-            Service_BusinessLogic logic = new Service_BusinessLogic();
             MainFrame view = new MainFrame(game1);
             view.setVisible(true);
-
-            if (!(logic.isAlivePlayer(game, 0)) || !(logic.isAlivePlayer(game, 0))) {
-                if (logic.whoWin(game) == -1) {
-                    String message = " Ничья ";
-                    JOptionPane.showMessageDialog(null, message);
-                } else {
-                    String message = " Выйграл " + logic.whoWin(game) + " игрок";
-                    JOptionPane.showMessageDialog(null, message);
-                }
-            }
         }
         if (cmd.equals("Exit")) {
             System.exit(0);

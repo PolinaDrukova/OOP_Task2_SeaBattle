@@ -16,7 +16,9 @@ public class MainFrame extends JFrame {
     private JMenuItem newGame;
     private JMenuItem exit;
     private Service_BusinessLogic logic;
-    private Button button = new Button("Step");
+    private Button button = new Button("Выстрел");
+    private Button button2 = new Button("Быстрая игра");
+
 
     public MainFrame(Game game) {
         this.game = game;
@@ -65,6 +67,7 @@ public class MainFrame extends JFrame {
         panel.add(button);
         this.add(panel);
         button.setBounds(20, 200, 50, 20);
+        button.setBackground(new Color(225, 225, 255));
         this.getContentPane().add(button);
 
         button.addActionListener(new ActionListener() {
@@ -77,7 +80,7 @@ public class MainFrame extends JFrame {
                         String message = " Ничья ";
                         JOptionPane.showMessageDialog(null, message);
                     } else {
-                        String message = " Выйграл " + logic.whoWin(game) + " игрок";
+                        String message = " Выйграл " + logic.whoWin(game) + " игрок !";
                         JOptionPane.showMessageDialog(null, message);
                     }
                     repaint();
@@ -89,23 +92,39 @@ public class MainFrame extends JFrame {
         });
 
 
+        panel.add(button2);
+        this.add(panel);
+        button2.setBounds(80, 200, 80, 20);
+        button2.setBackground(new Color(225, 225, 255));
+        this.getContentPane().add(button2);
+
+        button2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                logic.newGame(game);
+                repaint();
+                if (logic.whoWin(game) == -1) {
+                    String message = " Ничья ";
+                    JOptionPane.showMessageDialog(null, message);
+                } else {
+                    String message = " Выйграл " + logic.whoWin(game) + " игрок !";
+                    JOptionPane.showMessageDialog(null, message);
+                }
+
+
+                repaint();
+
+            }
+        });
+
         JMenuBar menuBar = new JMenuBar();
         menuBar.setBounds(0, 0, 800, 21);
-        this.
-
-                getContentPane().
-
-                add(menuBar);
-
+        this.getContentPane().add(menuBar);
         JMenu mnGame = new JMenu("Игра");
         menuBar.add(mnGame);
-        this.newGame = new
-
-                JMenuItem("Новая игра");
+        this.newGame = new JMenuItem("Новая игра");
         mnGame.add(this.newGame);
-        this.exit = new
-
-                JMenuItem("Выход");
+        this.exit = new JMenuItem("Выход");
         mnGame.add(this.exit);
 
     }

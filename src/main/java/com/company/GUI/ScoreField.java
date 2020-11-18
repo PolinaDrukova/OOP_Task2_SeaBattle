@@ -48,8 +48,8 @@ public  class ScoreField extends JPanel {
         }
 
 
-        String st = "Alive: ".concat(String.valueOf(this.ships));
-        g.drawString(st, 25, 100);
+        String st = "Корабли : ".concat(String.valueOf(this.ships));
+        g.drawString(st, 10, 100);
 
     }
 }

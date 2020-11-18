@@ -6,7 +6,6 @@ import com.company.Player.BasePlayer;
 public class Game {
     private int n = 2;
     private BasePlayer[] players = new BasePlayer[n];
-    private int currentIndex = 0;
     Service_BusinessLogic logic = new Service_BusinessLogic();
 
     public Game() {
@@ -14,17 +13,6 @@ public class Game {
             players[i] = new BasePlayer();
             logic.fill(players[i].field, players[i].ships);
         }
-    }
-
-    public void step() {
-        currentIndex++;
-        if (currentIndex >= players.length) {
-            currentIndex = 0;
-        }
-    }
-
-    public int getCurrentIndex() {
-        return currentIndex;
     }
 
     public BasePlayer getPlayers(int i) {
