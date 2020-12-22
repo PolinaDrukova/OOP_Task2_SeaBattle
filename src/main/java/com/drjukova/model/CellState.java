@@ -1,4 +1,4 @@
-package com.drjukova.cell;
+package com.drjukova.model;
 
 public enum CellState {
     alive,//живой

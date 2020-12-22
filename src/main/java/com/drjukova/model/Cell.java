@@ -1,10 +1,8 @@
-package com.drjukova.cell;
-
-import com.drjukova.point.Point;
+package com.drjukova.model;
 
 public class Cell {
     private Point position;
-    public CellState state;
+    private CellState state;
 
     public Cell(Point position) {
         this.position = position;

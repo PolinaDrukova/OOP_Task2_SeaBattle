@@ -1,7 +1,4 @@
-package com.drjukova.ship;
-
-import com.drjukova.cell.Cell;
-import com.drjukova.cell.CellState;
+package com.drjukova.model;
 
 import java.util.List;
 

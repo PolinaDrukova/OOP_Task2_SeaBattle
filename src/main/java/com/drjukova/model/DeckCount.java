@@ -1,4 +1,4 @@
-package com.drjukova.ship;
+package com.drjukova.model;
 
 public enum  DeckCount {
     Invalid(-1),

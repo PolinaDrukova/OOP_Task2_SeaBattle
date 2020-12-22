@@ -1,7 +1,4 @@
-package com.drjukova.player;
-
-import com.drjukova.ship.Ship;
-import com.drjukova.battlefield.BattleField;
+package com.drjukova.model;
 
 import java.util.ArrayList;
 import java.util.List;

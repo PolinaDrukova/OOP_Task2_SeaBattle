@@ -1,6 +1,6 @@
 package com.drjukova.gui;
 
-import com.drjukova.game.Game;
+import com.drjukova.model.Game;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

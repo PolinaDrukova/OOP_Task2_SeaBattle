@@ -1,8 +1,8 @@
 package com.drjukova.gui;
 
-import com.drjukova.cell.CellState;
-import com.drjukova.game.Game;
-import com.drjukova.point.Point;
+import com.drjukova.model.CellState;
+import com.drjukova.model.Game;
+import com.drjukova.model.Point;
 
 import java.awt.*;
 

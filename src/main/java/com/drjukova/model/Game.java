@@ -1,7 +1,6 @@
-package com.drjukova.game;
+package com.drjukova.model;
 
-import com.drjukova.gameLogic.GameLogic;
-import com.drjukova.player.BasePlayer;
+import com.drjukova.services.GameService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,12 +9,11 @@ public class Game {
     private final int n = 2;
     private List<BasePlayer> playerList = new ArrayList<>();//список игроков
     private int currentPlayerIndex = 0;
-    GameLogic logic = new GameLogic();
+    GameService logic = new GameService();
 
     public Game() {
         logic.setGame(this);
     }
-
 
     public List<BasePlayer> getPlayerList() {
         return playerList;

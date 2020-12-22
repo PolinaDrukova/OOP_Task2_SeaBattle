@@ -1,6 +1,4 @@
-package com.drjukova.ship;
-
-import com.drjukova.point.Point;
+package com.drjukova.model;
 
 public enum Orientation {
     None(-1),

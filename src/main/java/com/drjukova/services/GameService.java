@@ -1,22 +1,22 @@
-package com.drjukova.gameLogic;
+package com.drjukova.services;
 
-import com.drjukova.cell.CellState;
-import com.drjukova.ship.DeckCount;
-import com.drjukova.game.Game;
-import com.drjukova.ship.Orientation;
-import com.drjukova.cell.Cell;
-import com.drjukova.point.Point;
-import com.drjukova.ship.Ship;
-import com.drjukova.battlefield.BattleField;
-import com.drjukova.player.BasePlayer;
+import com.drjukova.model.CellState;
+import com.drjukova.model.DeckCount;
+import com.drjukova.model.Game;
+import com.drjukova.model.Orientation;
+import com.drjukova.model.Cell;
+import com.drjukova.model.Point;
+import com.drjukova.model.Ship;
+import com.drjukova.model.BattleField;
+import com.drjukova.model.BasePlayer;
 
 
 import java.util.*;
 
-public class GameLogic {
-
+public class GameService {
 
     public void fill(BattleField field, List<Ship> ships) {
+        setBattlefield(field);
         Random rand = new Random();
         Map<DeckCount, Integer> shipCounter = shipCounter();
 
@@ -150,6 +150,7 @@ public class GameLogic {
                 Point point = new Point(x, y);
                 field.cells[y][x] = new Cell(point);
                 field.getShotPoints().add(field.cells[y][x]);
+
             }
         }
     }
@@ -227,7 +228,7 @@ public class GameLogic {
     private boolean doShot(BasePlayer player) {
         int size = player.getBattleField().getShotPoints().size();
         Cell cell = player.getBattleField().getShotPoints().get((int) (Math.random() * (size)));//получаем рандомную клетку для обстрела
-        if (cell.state == CellState.alive) { //если является кораблем, меняем на состояние ранен
+        if (cell.getState() == CellState.alive) { //если является кораблем, меняем на состояние ранен
             cell.setState(CellState.injured);
             for (Ship ship : player.getShips()) {
                 if (ship.getDecks().contains(cell)) {
@@ -237,7 +238,7 @@ public class GameLogic {
                 }
             }
             return true;
-        } else if (cell.state == CellState.empty) {
+        } else if (cell.getState() == CellState.empty) {
             cell.setState(CellState.missed);
         }
         player.getBattleField().getShotPoints().remove(cell);//удаляем точку, по которой стреляли

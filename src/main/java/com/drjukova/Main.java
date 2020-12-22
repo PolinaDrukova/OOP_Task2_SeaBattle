@@ -1,7 +1,8 @@
 package com.drjukova;
 
-import com.drjukova.game.Game;
 import com.drjukova.gui.MainFrame;
+import com.drjukova.model.Game;
+import com.drjukova.services.SerialiseService;
 
 import javax.swing.*;
 

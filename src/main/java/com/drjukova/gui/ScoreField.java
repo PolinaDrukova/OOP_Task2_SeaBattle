@@ -1,8 +1,8 @@
 package com.drjukova.gui;
 
-import com.drjukova.game.Game;
-import com.drjukova.gameLogic.GameLogic;
-import com.drjukova.ship.Ship;
+import com.drjukova.model.Game;
+import com.drjukova.services.GameService;
+import com.drjukova.model.Ship;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,12 +10,12 @@ import java.awt.*;
 public class ScoreField extends JPanel {
     private Game game;
     private int player;
-    private GameLogic logic;
+    private GameService logic;
 
     public ScoreField(Game model, int player) {
         this.game = model;
         this.player = player;
-        this.logic = new GameLogic();
+        this.logic = new GameService();
     }
 
     protected void paintComponent(Graphics g) {
@@ -25,6 +25,7 @@ public class ScoreField extends JPanel {
         int ships = 0;
 
         for (Ship ship : game.getPlayerList().get(player).getShips()) {
+
             if (ship != null) {
                 if (logic.isAliveShip(ship)) {
                     ships++;

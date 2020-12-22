@@ -1,6 +1,6 @@
 package com.drjukova.gui;
 
-import com.drjukova.game.Game;
+import com.drjukova.model.Game;
 
 import javax.swing.*;
 import java.awt.*;

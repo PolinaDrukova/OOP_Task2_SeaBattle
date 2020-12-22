@@ -1,4 +1,4 @@
-package com.drjukova.point;
+package com.drjukova.model;
 
 public class Point {
     private int x;
